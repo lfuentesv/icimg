@@ -11,7 +11,7 @@ import cl.lfuentes.icimg.errorTo.Error;
 
 @ControllerAdvice
 public class ParametrosAdvisor {
-	@ExceptionHandler(ejeNoEncontradoException.class)
+	@ExceptionHandler(NoEncontradoException.class)
 	@ResponseStatus(HttpStatus.BAD_REQUEST)
 	@ResponseBody
 	public ErrorResponse onEjeNoEncontradoException(ejeNoEncontradoException e) {
