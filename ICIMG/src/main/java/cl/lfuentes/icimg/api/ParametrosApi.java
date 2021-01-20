@@ -15,14 +15,14 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import cl.lfuentes.icimg.entityTo.Eje;
-import cl.lfuentes.icimg.service.ParametrosService;
+import cl.lfuentes.icimg.service.EjeService;
 
 @RestController
 @RequestMapping(value = "/parametros")
 public class ParametrosApi {
 	
 	@Autowired
-	private ParametrosService servicio;
+	private EjeService servicio;
 	
 	/****Ejes**/
 	@PostMapping("/eje")

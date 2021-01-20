@@ -5,15 +5,17 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import cl.lfuentes.icimg.dao.EjeRepository;
 import cl.lfuentes.icimg.entityTo.Eje;
 import cl.lfuentes.icimg.validacion.ejeNoEncontradoException;
 
 @Service
-public class ParametrosService {
+public class EjeService {
 
 	@Autowired
 	private EjeRepository ejeRepo;
+	
 
 	public Eje crear(Eje eje) {
 
