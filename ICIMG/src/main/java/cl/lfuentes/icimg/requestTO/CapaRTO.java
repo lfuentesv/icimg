@@ -1,34 +1,16 @@
-package cl.lfuentes.icimg.entityTo;
+package cl.lfuentes.icimg.requestTO;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+public class CapaRTO {
 
-@Entity
-public class Capa {
-
-	@Id
 	private String codigo;
 	private String nombre;
 	private float espesorObjetivo;
 	private float elevacionObjetivo;
 	private float tolerancia;
-	@ManyToOne(optional = false, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	private Area codArea;
-	@ManyToOne(optional = false, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	private Sector codSector;
+	private String codArea;
+	private String codSector;
 	
-	public Capa() {
-	}
-
-	public Capa(String codigo2, String nombre2, float elevacionObjetivo2, float espesorObjetivo2, float tolerancia2) {
-		this.codigo = codigo2;
-		this.nombre = nombre2;
-		this.elevacionObjetivo = elevacionObjetivo2;
-		this.espesorObjetivo = espesorObjetivo2;
-		this.tolerancia = tolerancia2;
+	public CapaRTO() {
 	}
 
 	public String getCodigo() {
@@ -71,22 +53,20 @@ public class Capa {
 		this.tolerancia = tolerancia;
 	}
 
-	public Area getCodArea() {
+	public String getCodArea() {
 		return codArea;
 	}
 
-	public void setCodArea(Area codArea) {
+	public void setCodArea(String codArea) {
 		this.codArea = codArea;
 	}
 
-	public Sector getCodSector() {
+	public String getCodSector() {
 		return codSector;
 	}
 
-	public void setCodSector(Sector codSector) {
+	public void setCodSector(String codSector) {
 		this.codSector = codSector;
 	}
-
-	
 	
 }
