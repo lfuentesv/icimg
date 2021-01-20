@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import cl.lfuentes.icimg.entityTo.Area;
 import cl.lfuentes.icimg.entityTo.Eje;
 import cl.lfuentes.icimg.service.EjeService;
 
@@ -26,7 +25,6 @@ public class EjesApi {
 	@Autowired
 	private EjeService servicio;
 	
-	/****Ejes**/
 	@PostMapping("")
 	public ResponseEntity<Eje> registro(@Valid @RequestBody Eje eje ){
 		
@@ -50,41 +48,4 @@ public class EjesApi {
 		
 		return ResponseEntity.ok(eje);
 	}
-	/**********/
-	
-	/****Areas**/
-	@PostMapping("/area")
-	public ResponseEntity<Area> registro(@Valid @RequestBody Area area ){
-		
-		Area areaRespuesta = servicio.crear(area);
-		
-		return new ResponseEntity <>(areaRespuesta,HttpStatus.CREATED );
-	}
-	
-	@GetMapping("/area")
-	public ResponseEntity<List<Area>> buscar(){
-		
-		List<Area> areas = servicio.listar();
-		
-		return ResponseEntity.ok(areas);
-	}
-	
-	@GetMapping("/area/{id}")
-	public ResponseEntity<Optional<Area>> buscarId(@PathVariable(value = "id") String id){
-		
-		Optional<Area> area = servicio.buscar(area);
-		
-		return ResponseEntity.ok(area);
-	}
-	
-	/**********/
-	
-	/****Sector**/
-	/**********/
-	
-	/****Capas**/
-	/**********/
-	
-	/****Tramos**/
-	/**********/
 }
