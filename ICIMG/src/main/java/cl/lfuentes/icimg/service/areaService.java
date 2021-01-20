@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 
 import cl.lfuentes.icimg.dao.AreaRepository;
 import cl.lfuentes.icimg.entityTo.Area;
+import cl.lfuentes.icimg.entityTo.Eje;
+import cl.lfuentes.icimg.requestTO.AreaRTO;
 import cl.lfuentes.icimg.validacion.areaNoEncontradaException;
 
 @Service
@@ -16,9 +18,18 @@ public class areaService {
 	@Autowired
 	private AreaRepository repo;
 	
-	public Area crear(Area area) {
-
-		Area areaCreada = repo.saveAndFlush(area);
+	@Autowired
+	private EjeService ejeServicio;
+	
+	public Area crear(AreaRTO area) {
+		/*Validamos si el Eje enviado Existe*/
+		
+		Optional<Eje> eje = ejeServicio.buscar(area.getEje());		
+	
+		Area  areaPO = new Area ( area.getCodigo(), area.getNombre());
+		eje.ifPresent(areaPO::setEje);
+		Area areaCreada = repo.saveAndFlush(areaPO);
+	
 		return areaCreada;
 	}
 

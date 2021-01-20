@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import cl.lfuentes.icimg.entityTo.Area;
+import cl.lfuentes.icimg.requestTO.AreaRTO;
 import cl.lfuentes.icimg.service.areaService;
 
 @RestController
@@ -26,8 +27,8 @@ public class AreasApi {
 	private areaService servicio;
 	
 	@PostMapping("")
-	public ResponseEntity<Area> registro(@Valid @RequestBody Area area ){
-		
+	public ResponseEntity<Area> registro(@Valid @RequestBody AreaRTO area ){
+				
 		Area areaRespuesta = servicio.crear(area);
 		
 		return new ResponseEntity <>(areaRespuesta,HttpStatus.CREATED );
