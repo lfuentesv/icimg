@@ -14,7 +14,7 @@ public class ParametrosAdvisor {
 	@ExceptionHandler(NoEncontradoException.class)
 	@ResponseStatus(HttpStatus.BAD_REQUEST)
 	@ResponseBody
-	public ErrorResponse onEjeNoEncontradoException(ejeNoEncontradoException e) {
+	public ErrorResponse onNoEncontradoException(NoEncontradoException e) {
 		ErrorResponse respuestaError = new ErrorResponse();
 		respuestaError.getErrores().add(new Error(e.getMessage()));
 	  return respuestaError;
