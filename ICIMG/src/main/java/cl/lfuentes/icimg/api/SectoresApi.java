@@ -28,9 +28,9 @@ public class SectoresApi {
 	@PostMapping("")
 	public ResponseEntity<Sector> registro(@Valid @RequestBody Sector sector ){
 		
-		Sector sectroRespuesta = servicio.crear(sector);
+		Sector sectorRespuesta = servicio.crear(sector);
 		
-		return new ResponseEntity <>(sectroRespuesta,HttpStatus.CREATED );
+		return new ResponseEntity <>(sectorRespuesta,HttpStatus.CREATED );
 	}
 	
 	@GetMapping("")
