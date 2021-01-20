@@ -1,6 +1,6 @@
 package cl.lfuentes.icimg.validacion;
 
-public class ejeNoEncontradoException extends RuntimeException{
+public class ejeNoEncontradoException extends NoEncontradoException{
 
 	private static final long serialVersionUID = -3014896195971684306L;
 
