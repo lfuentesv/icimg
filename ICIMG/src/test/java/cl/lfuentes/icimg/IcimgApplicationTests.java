@@ -6,13 +6,13 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import cl.lfuentes.icimg.api.ParametrosApi;
+import cl.lfuentes.icimg.api.EjesApi;
 
 @SpringBootTest
 class IcimgApplicationTests {
 
 	@Autowired
-	ParametrosApi parametrosController;
+	EjesApi parametrosController;
 	
 	@Test
 	void contextLoads() {

@@ -14,18 +14,20 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import cl.lfuentes.icimg.entityTo.Area;
 import cl.lfuentes.icimg.entityTo.Eje;
 import cl.lfuentes.icimg.service.EjeService;
 
 @RestController
-@RequestMapping(value = "/parametros")
-public class ParametrosApi {
+@RequestMapping(value = "/parametros/eje")
+public class EjesApi {
 	
 	@Autowired
 	private EjeService servicio;
 	
 	/****Ejes**/
-	@PostMapping("/eje")
+	@PostMapping("")
 	public ResponseEntity<Eje> registro(@Valid @RequestBody Eje eje ){
 		
 		Eje ejeRespuesta = servicio.crear(eje);
@@ -33,7 +35,7 @@ public class ParametrosApi {
 		return new ResponseEntity <>(ejeRespuesta,HttpStatus.CREATED );
 	}
 	
-	@GetMapping("/eje")
+	@GetMapping("")
 	public ResponseEntity<List<Eje>> buscar(){
 		
 		List<Eje> ejes = servicio.listar();
@@ -41,18 +43,40 @@ public class ParametrosApi {
 		return ResponseEntity.ok(ejes);
 	}
 	
-	@GetMapping("/eje/{id}")
+	@GetMapping("/{id}")
 	public ResponseEntity<Optional<Eje>> buscarId(@PathVariable(value = "id") String id){
 		
 		Optional<Eje> eje = servicio.buscar(id);
 		
 		return ResponseEntity.ok(eje);
 	}
-	
-
 	/**********/
 	
 	/****Areas**/
+	@PostMapping("/area")
+	public ResponseEntity<Area> registro(@Valid @RequestBody Area area ){
+		
+		Area areaRespuesta = servicio.crear(area);
+		
+		return new ResponseEntity <>(areaRespuesta,HttpStatus.CREATED );
+	}
+	
+	@GetMapping("/area")
+	public ResponseEntity<List<Area>> buscar(){
+		
+		List<Area> areas = servicio.listar();
+		
+		return ResponseEntity.ok(areas);
+	}
+	
+	@GetMapping("/area/{id}")
+	public ResponseEntity<Optional<Area>> buscarId(@PathVariable(value = "id") String id){
+		
+		Optional<Area> area = servicio.buscar(area);
+		
+		return ResponseEntity.ok(area);
+	}
+	
 	/**********/
 	
 	/****Sector**/
