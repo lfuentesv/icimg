@@ -12,9 +12,11 @@ public class LineaControl {
 
 	@Id
 	@GeneratedValue
-	private Integer nro_linea;
-	@ManyToOne(optional = false, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	private ProtocoloTopografia codProtocolo;
+	private Integer nroLinea;
+	/*
+	 * @ManyToOne(optional = false, cascade = CascadeType.ALL, fetch =
+	 * FetchType.EAGER) private ProtocoloTopografia codProtocolo;
+	 */
 	private Integer kilometro;
 	private float elevacionBordeNorte;
 	private float elevacionCentroNorte;
@@ -29,20 +31,19 @@ public class LineaControl {
 	}
 
 	public Integer getNro_linea() {
-		return nro_linea;
+		return nroLinea;
 	}
 
-	public void setNro_linea(Integer nro_linea) {
-		this.nro_linea = nro_linea;
+	public void setNro_linea(Integer nroLinea) {
+		this.nroLinea = nroLinea;
 	}
 
-	public ProtocoloTopografia getCodProtocolo() {
-		return codProtocolo;
-	}
-
-	public void setCodProtocolo(ProtocoloTopografia codProtocolo) {
-		this.codProtocolo = codProtocolo;
-	}
+	/*
+	 * public ProtocoloTopografia getCodProtocolo() { return codProtocolo; }
+	 * 
+	 * public void setCodProtocolo(ProtocoloTopografia codProtocolo) {
+	 * this.codProtocolo = codProtocolo; }
+	 */
 
 	public Integer getKilometro() {
 		return kilometro;

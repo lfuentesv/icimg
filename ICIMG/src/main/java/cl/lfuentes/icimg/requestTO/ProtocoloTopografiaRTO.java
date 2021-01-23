@@ -1,55 +1,36 @@
-package cl.lfuentes.icimg.entityTo;
+package cl.lfuentes.icimg.requestTO;
 
 import java.util.Date;
 import java.util.List;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
+import cl.lfuentes.icimg.entityTo.LineaControl;
 
-@Entity
-public class ProtocoloTopografia {
+public class ProtocoloTopografiaRTO {
 
-	@Id
 	private String codigo;
-	@ManyToOne(optional = false, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	private Tramo idTramo;
+	private Integer idTramo;
 	private Date fechaControl;
 	private String observaciones;
 	private String nombreTopografo;
 	private boolean cumpleAlineamientos;
 	
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private List<LineaControl> lineasControl; 
 	
 		
-	public ProtocoloTopografia() {
+	public ProtocoloTopografiaRTO() {
 
 	}
 	
-	public ProtocoloTopografia(String codigo, Date fechaControl, String nombreTopografo, String observaciones, List<LineaControl> lineasControl) {
-	
-		this.codigo = codigo;
-		this.fechaControl = fechaControl;
-		this.nombreTopografo = nombreTopografo;
-		this.observaciones = observaciones;
-		this.lineasControl = lineasControl;
-	
-	}
-
 	public String getCodigo() {
 		return codigo;
 	}
 	public void setCodigo(String codigo) {
 		this.codigo = codigo;
 	}
-	public Tramo getIdTramo() {
+	public Integer getIdTramo() {
 		return idTramo;
 	}
-	public void setIdTramo(Tramo idTramo) {
+	public void setIdTramo(Integer idTramo) {
 		this.idTramo = idTramo;
 	}
 	public Date getFechaControl() {
@@ -75,6 +56,14 @@ public class ProtocoloTopografia {
 	}
 	public void setCumpleAlineamientos(boolean cumpleAlineamientos) {
 		this.cumpleAlineamientos = cumpleAlineamientos;
+	}
+
+	public List<LineaControl> getLineasControl() {
+		return lineasControl;
+	}
+
+	public void setLineasControl(List<LineaControl> lineasControl) {
+		this.lineasControl = lineasControl;
 	}
 
 	
