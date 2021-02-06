@@ -43,7 +43,7 @@ public class RicApi {
 	}
 	
 	@GetMapping("/{id}")
-	public ResponseEntity<Optional<Ric>> buscarId(@PathVariable(value = "id") String id){
+	public ResponseEntity<Optional<Ric>> buscarId(@PathVariable(value = "id") Integer id){
 		
 		Optional<Ric> protocolo = servicio.buscar(id);
 		

@@ -8,6 +8,6 @@ import cl.lfuentes.icimg.entityTo.Ric;
 
 public interface RicRepository extends JpaRepository<Ric, String>{
 
-	Optional<Ric> findByNumero(String numero);
+	Optional<Ric> findByNumero(Integer numero);
 
 }

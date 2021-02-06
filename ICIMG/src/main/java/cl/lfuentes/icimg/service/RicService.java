@@ -38,7 +38,7 @@ public class RicService {
 		return rics;
 	}
 
-	public Optional<Ric> buscar(String numero) {
+	public Optional<Ric> buscar(Integer numero) {
 		
 		return Optional.ofNullable(repo.findByNumero(numero).orElseThrow(() -> new RicNoEncontradaException(numero)));
 	}
