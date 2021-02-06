@@ -77,5 +77,14 @@ public class ProtocoloTopografia {
 		this.cumpleAlineamientos = cumpleAlineamientos;
 	}
 
+	public List<LineaControl> getLineasControl() {
+		return lineasControl;
+	}
+
+	public void setLineasControl(List<LineaControl> lineasControl) {
+		this.lineasControl = lineasControl;
+	}
+
+	
 	
 }
