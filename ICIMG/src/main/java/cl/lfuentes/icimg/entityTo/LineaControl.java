@@ -1,17 +1,15 @@
 package cl.lfuentes.icimg.entityTo;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 
 @Entity
 public class LineaControl {
 
 	@Id
 	@GeneratedValue
+	private Integer idLinea;
 	private Integer nroLinea;
 	/*
 	 * @ManyToOne(optional = false, cascade = CascadeType.ALL, fetch =
@@ -107,6 +105,22 @@ public class LineaControl {
 
 	public void setObservacion(String observacion) {
 		this.observacion = observacion;
+	}
+
+	public Integer getIdLinea() {
+		return idLinea;
+	}
+
+	public void setIdLinea(Integer idLinea) {
+		this.idLinea = idLinea;
+	}
+
+	public Integer getNroLinea() {
+		return nroLinea;
+	}
+
+	public void setNroLinea(Integer nroLinea) {
+		this.nroLinea = nroLinea;
 	}
 	
 		
