@@ -13,8 +13,10 @@ public class Muestra {
 	@Id
 	@GeneratedValue
 	private Integer numero;
-	@ManyToOne(optional = false, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	private Ric nroInspeccion;
+	/*
+	 * @ManyToOne(optional = false, cascade = CascadeType.ALL, fetch =
+	 * FetchType.EAGER) private Ric nroInspeccion;
+	 */
 	private Integer kilometro;
 	private float espesorCapa;
 	private float espesorControl;
@@ -37,12 +39,12 @@ public class Muestra {
 	public void setNumero(Integer numero) {
 		this.numero = numero;
 	}
-	public Ric getNroInspeccion() {
-		return nroInspeccion;
-	}
-	public void setNroInspeccion(Ric nroInspeccion) {
-		this.nroInspeccion = nroInspeccion;
-	}
+//	public Ric getNroInspeccion() {
+//		return nroInspeccion;
+//	}
+//	public void setNroInspeccion(Ric nroInspeccion) {
+//		this.nroInspeccion = nroInspeccion;
+//	}
 	public Integer getKilometro() {
 		return kilometro;
 	}
