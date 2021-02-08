@@ -27,6 +27,7 @@ public class RicService {
 	
 		Ric  ricPO = new Ric ( ric.getNumero(), ric.getFecha(), ric.getNombreLaboratorista(), ric.getComentarioEjecucion(), ric.getEquiposUtilizados(), ric.getRicReferencia(), ric.getDmcs(), ric.getHumedadOptima(), ric.getMuestras() );
 		tramo.ifPresent(ricPO::setIdTramo);
+		ricPO.getMuestras().forEach( (p) -> {p.setRic(ricPO);});
 		Ric ricCreado = repo.saveAndFlush(ricPO);
 	
 		return ricCreado;
