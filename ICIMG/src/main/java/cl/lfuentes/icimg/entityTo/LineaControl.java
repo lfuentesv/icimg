@@ -3,6 +3,8 @@ package cl.lfuentes.icimg.entityTo;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class LineaControl {
@@ -11,10 +13,11 @@ public class LineaControl {
 	@GeneratedValue
 	private Integer idLinea;
 	private Integer nroLinea;
-	/*
-	 * @ManyToOne(optional = false, cascade = CascadeType.ALL, fetch =
-	 * FetchType.EAGER) private ProtocoloTopografia codProtocolo;
-	 */
+	
+	@ManyToOne 
+	@JoinColumn(name="codProtocolo")
+	private ProtocoloTopografia protocoloTopografia;
+	
 	private Integer kilometro;
 	private float elevacionBordeNorte;
 	private float elevacionCentroNorte;
@@ -36,12 +39,11 @@ public class LineaControl {
 		this.nroLinea = nroLinea;
 	}
 
-	/*
-	 * public ProtocoloTopografia getCodProtocolo() { return codProtocolo; }
-	 * 
-	 * public void setCodProtocolo(ProtocoloTopografia codProtocolo) {
-	 * this.codProtocolo = codProtocolo; }
-	 */
+
+
+	public void setProtocoloTopografia(ProtocoloTopografia protocoloTopografia) {
+		this.protocoloTopografia = protocoloTopografia;
+	}
 
 	public Integer getKilometro() {
 		return kilometro;

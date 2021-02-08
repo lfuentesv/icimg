@@ -27,6 +27,8 @@ public class ProtocoloTopografiaService {
 	
 		ProtocoloTopografia  protocoloPO = new ProtocoloTopografia ( protocolo.getCodigo(), protocolo.getFechaControl(), protocolo.getNombreTopografo(), protocolo.getObservaciones(), protocolo.getLineasControl());
 		tramo.ifPresent(protocoloPO::setIdTramo);
+		
+		protocoloPO.getLineasControl().forEach( (p) -> {p.setProtocoloTopografia(protocoloPO);});
 		ProtocoloTopografia protocoloCreado = repo.saveAndFlush(protocoloPO);
 	
 		return protocoloCreado;

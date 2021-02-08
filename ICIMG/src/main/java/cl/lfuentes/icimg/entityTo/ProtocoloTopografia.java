@@ -22,7 +22,7 @@ public class ProtocoloTopografia {
 	private String nombreTopografo;
 	private boolean cumpleAlineamientos;
 	
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@OneToMany(mappedBy="protocoloTopografia" ,cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private List<LineaControl> lineasControl; 
 	
 		
