@@ -3,6 +3,7 @@ package cl.lfuentes.icimg.entityTo;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
@@ -10,6 +11,7 @@ import javax.persistence.ManyToOne;
 public class Tramo {
 	
 	@Id
+	@GeneratedValue
 	private Integer id;
 	@ManyToOne(optional = false, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private Capa codCapa;
@@ -17,6 +19,12 @@ public class Tramo {
 	private Integer kmTermino;
 
 	public Tramo() {
+	}
+
+	public Tramo(Integer id2, Integer kmInicio2, Integer kmTermino2 ) {
+		this.id =id2;
+		this.kmInicio = kmInicio2;
+		this.kmTermino = kmTermino2;
 	}
 
 	public Integer getId() {

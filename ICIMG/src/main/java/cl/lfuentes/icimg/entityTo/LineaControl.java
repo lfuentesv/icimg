@@ -1,10 +1,9 @@
 package cl.lfuentes.icimg.entityTo;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 @Entity
@@ -12,9 +11,13 @@ public class LineaControl {
 
 	@Id
 	@GeneratedValue
-	private Integer nro_linea;
-	@ManyToOne(optional = false, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	private ProtocoloTopografia codProtocolo;
+	private Integer idLinea;
+	private Integer nroLinea;
+	
+	@ManyToOne 
+	@JoinColumn(name="codProtocolo")
+	private ProtocoloTopografia protocoloTopografia;
+	
 	private Integer kilometro;
 	private float elevacionBordeNorte;
 	private float elevacionCentroNorte;
@@ -29,19 +32,17 @@ public class LineaControl {
 	}
 
 	public Integer getNro_linea() {
-		return nro_linea;
+		return nroLinea;
 	}
 
-	public void setNro_linea(Integer nro_linea) {
-		this.nro_linea = nro_linea;
+	public void setNro_linea(Integer nroLinea) {
+		this.nroLinea = nroLinea;
 	}
 
-	public ProtocoloTopografia getCodProtocolo() {
-		return codProtocolo;
-	}
 
-	public void setCodProtocolo(ProtocoloTopografia codProtocolo) {
-		this.codProtocolo = codProtocolo;
+
+	public void setProtocoloTopografia(ProtocoloTopografia protocoloTopografia) {
+		this.protocoloTopografia = protocoloTopografia;
 	}
 
 	public Integer getKilometro() {
@@ -106,6 +107,22 @@ public class LineaControl {
 
 	public void setObservacion(String observacion) {
 		this.observacion = observacion;
+	}
+
+	public Integer getIdLinea() {
+		return idLinea;
+	}
+
+	public void setIdLinea(Integer idLinea) {
+		this.idLinea = idLinea;
+	}
+
+	public Integer getNroLinea() {
+		return nroLinea;
+	}
+
+	public void setNroLinea(Integer nroLinea) {
+		this.nroLinea = nroLinea;
 	}
 	
 		

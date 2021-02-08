@@ -1,10 +1,9 @@
 package cl.lfuentes.icimg.entityTo;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 @Entity
@@ -12,9 +11,14 @@ public class Muestra {
 	
 	@Id
 	@GeneratedValue
-	private Integer numero;
-	@ManyToOne(optional = false, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	private Ric nroInspeccion;
+	private Integer numeroMuestra;
+	
+	@ManyToOne /* (optional = false, cascade = CascadeType.ALL, fetch = FetchType.EAGER) */
+	//@JoinColumn(name="numero", nullable=false, insertable=false, updatable=false)
+	@JoinColumn(name="numero")
+	private Ric ric;
+	
+	 
 	private Integer kilometro;
 	private float espesorCapa;
 	private float espesorControl;
@@ -31,18 +35,13 @@ public class Muestra {
 
 	}
 	
-	public Integer getNumero() {
-		return numero;
+	public Integer getNumeroMuestra() {
+		return numeroMuestra;
 	}
-	public void setNumero(Integer numero) {
-		this.numero = numero;
+	public void setNumeroMuestra(Integer numero) {
+		this.numeroMuestra = numero;
 	}
-	public Ric getNroInspeccion() {
-		return nroInspeccion;
-	}
-	public void setNroInspeccion(Ric nroInspeccion) {
-		this.nroInspeccion = nroInspeccion;
-	}
+
 	public Integer getKilometro() {
 		return kilometro;
 	}
@@ -108,6 +107,10 @@ public class Muestra {
 	}
 	public void setCota(Integer cota) {
 		this.cota = cota;
+	}
+
+	public void setRic(Ric ric) {
+		this.ric = ric;
 	}
 	
 }

@@ -1,23 +1,14 @@
-package cl.lfuentes.icimg.entityTo;
+package cl.lfuentes.icimg.requestTO;
 
 import java.util.Date;
 import java.util.List;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
+import cl.lfuentes.icimg.entityTo.Muestra;
 
-@Entity
-public class Ric {
-	
-	@Id
-	@GeneratedValue
+public class RicRTO {
+
 	private Integer numero;
-	@ManyToOne(optional = false, cascade = CascadeType.ALL)
-	private Tramo idTramo;
+	private Integer idTramo;
 	private Date fecha;
 	private String nombreLaboratorista;
 	private String comentarioEjecucion;
@@ -25,29 +16,8 @@ public class Ric {
 	private float ricReferencia;
 	private float dmcs;
 	private float humedadOptima;
-	
-	@OneToMany( mappedBy="ric", cascade = CascadeType.ALL)
-	private List<Muestra> muestras;
-	
-	public Ric() {
-	
-	}
 
-	public Ric(Integer numero, Date fecha, String nombreLaboratorista, String comentarioEjecucion,
-			String equiposUtilizados, float ricReferencia, float dmcs, float humedadOptima,
-			List<Muestra> muestras) {
-		
-		this.numero = numero;
-		this.fecha = fecha;
-		this.nombreLaboratorista = nombreLaboratorista;
-		this.comentarioEjecucion = comentarioEjecucion;
-		this.equiposUtilizados = equiposUtilizados;
-		this.ricReferencia = ricReferencia;
-		this.dmcs = dmcs;
-		this.humedadOptima = humedadOptima;
-		this.muestras = muestras;
-		
-	}
+	private List<Muestra> muestras;
 
 	public Integer getNumero() {
 		return numero;
@@ -57,13 +27,7 @@ public class Ric {
 		this.numero = numero;
 	}
 
-	public Tramo getIdTramo() {
-		return idTramo;
-	}
 
-	public void setIdTramo(Tramo idTramo) {
-		this.idTramo = idTramo;
-	}
 
 	public Date getFecha() {
 		return fecha;
@@ -128,6 +92,13 @@ public class Ric {
 	public void setMuestras(List<Muestra> muestras) {
 		this.muestras = muestras;
 	}
-	
 
+	public Integer getIdTramo() {
+		return idTramo;
+	}
+
+	public void setIdTramo(Integer idTramo) {
+		this.idTramo = idTramo;
+	}
+	
 }
