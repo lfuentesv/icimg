@@ -1,34 +1,14 @@
-package cl.lfuentes.icimg.entityTo;
+package cl.lfuentes.icimg.requestTO;
 
 import java.util.Date;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 
-@Entity
-public class ProtocoloRecepcion {
+public class ProtocoloRecepcionRTO {
 
-
-	@Id
 	private String codigo;
-	
-	@OneToOne(optional = false, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	@JoinColumn( name = "cod_Protocolo")
-	private ProtocoloTopografia codProtocolo;
-	
-	@OneToOne(optional = false, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	@JoinColumn( name = "nro_Inspeccion")
-	private Ric nroInspeccion;
-	
-	@ManyToOne(optional = false, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	@JoinColumn( name = "id_Tramo")
-	private Tramo idTramo;
-	
+	private String codProtocolo;
+	private Integer nroInspeccion;
+	private Integer idTramo;
 	private String nombreSupervisor;
 	private Date fechaEmision;
 	private boolean equiposAdecuados;
@@ -48,37 +28,9 @@ public class ProtocoloRecepcion {
 	private boolean terminacionUniforme;
 	private boolean veredicto;
 
-	public ProtocoloRecepcion() {
+	public ProtocoloRecepcionRTO() {
 		super();
 	}
-
-	public ProtocoloRecepcion(String codigo, String nombreSupervisor, Date fechaEmision, boolean equiposAdecuados,
-			boolean emprestitoAprobado, boolean requiereAello, boolean cumpleGranulometria, boolean cumpleHumedad,
-			boolean cumpleElevacion, boolean capaLibreSobretamaños, boolean sobretamañoPretilesTaludes,
-			boolean humectacionMaterial, boolean compactacionCapa, float espesorNominal, float largoCapa,
-			float anchoPromedioTeorico, float anchoPromedioReal, boolean terminacionUniforme, boolean veredicto) {
-		
-			this.codigo = codigo;
-			this.nombreSupervisor = nombreSupervisor;
-			this.fechaEmision = fechaEmision;
-			this.equiposAdecuados = equiposAdecuados;
-			this.emprestitoAprobado = emprestitoAprobado;
-			this.requiereAello = requiereAello;
-			this.cumpleGranulometria = cumpleGranulometria;
-			this.cumpleHumedad = cumpleHumedad;
-			this.cumpleElevacion = cumpleElevacion;
-			this.capaLibreSobretamaños = capaLibreSobretamaños;
-			this.sobretamañoPretilesTaludes = sobretamañoPretilesTaludes;
-			this.humectacionMaterial = humectacionMaterial;
-			this.compactacionCapa = compactacionCapa;
-			this.espesorNominal = espesorNominal;
-			this.largoCapa = largoCapa;
-			this.anchoPromedioTeorico = anchoPromedioTeorico;
-			this.anchoPromedioReal = anchoPromedioReal;
-			this.terminacionUniforme = terminacionUniforme; 
-			this.veredicto = veredicto;
-	}
-
 
 	public String getCodigo() {
 		return codigo;
@@ -88,19 +40,19 @@ public class ProtocoloRecepcion {
 		this.codigo = codigo;
 	}
 
-	public ProtocoloTopografia getCodProtocolo() {
+	public String getCodProtocolo() {
 		return codProtocolo;
 	}
 
-	public void setCodProtocolo(ProtocoloTopografia codProtocolo) {
+	public void setCodProtocolo(String codProtocolo) {
 		this.codProtocolo = codProtocolo;
 	}
 
-	public Ric getNroInspeccion() {
+	public Integer getNroInspeccion() {
 		return nroInspeccion;
 	}
 
-	public void setNroInspeccion(Ric nroInspeccion) {
+	public void setNroInspeccion(Integer nroInspeccion) {
 		this.nroInspeccion = nroInspeccion;
 	}
 
@@ -248,15 +200,14 @@ public class ProtocoloRecepcion {
 		this.veredicto = veredicto;
 	}
 
-	public Tramo getIdTramo() {
+	public Integer getIdTramo() {
 		return idTramo;
 	}
 
-	public void setIdTramo(Tramo idTramo) {
+	public void setIdTramo(Integer idTramo) {
 		this.idTramo = idTramo;
 	}
-	
-	
 		
+	
 }
 
