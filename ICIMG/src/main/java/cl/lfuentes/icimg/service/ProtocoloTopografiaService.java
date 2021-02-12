@@ -10,7 +10,7 @@ import cl.lfuentes.icimg.dao.ProtocoloTopografiaRepository;
 import cl.lfuentes.icimg.entityTo.ProtocoloTopografia;
 import cl.lfuentes.icimg.entityTo.Tramo;
 import cl.lfuentes.icimg.requestTO.ProtocoloTopografiaRTO;
-import cl.lfuentes.icimg.validacion.protocoloTopografiaNoEncontradaException;
+import cl.lfuentes.icimg.validacion.protocoloTopografiaNoEncontradoException;
 
 @Service
 public class ProtocoloTopografiaService {
@@ -42,7 +42,7 @@ public class ProtocoloTopografiaService {
 
 	public Optional<ProtocoloTopografia> buscar(String codigo) {
 		
-		return Optional.ofNullable(repo.findByCodigo(codigo).orElseThrow(() -> new protocoloTopografiaNoEncontradaException(codigo)));
+		return Optional.ofNullable(repo.findByCodigo(codigo).orElseThrow(() -> new protocoloTopografiaNoEncontradoException(codigo)));
 	}
 
 }
