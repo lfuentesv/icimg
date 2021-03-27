@@ -12,6 +12,7 @@ import cl.lfuentes.icimg.entityTo.Area;
 import cl.lfuentes.icimg.entityTo.Eje;
 import cl.lfuentes.icimg.requestTO.AreaRTO;
 import cl.lfuentes.icimg.validacion.areaNoEncontradaException;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class areaService {
@@ -53,6 +54,15 @@ public class areaService {
 		Area areaCreada = repo.saveAndFlush(areaPO);
 
 		return areaCreada;
+	}
+
+	@Transactional
+	public void eliminar(String codigo) {
+
+		Optional<Area> areaExistente = repo.findByCodigo(codigo);
+		if (!areaExistente.isPresent()) throw new areaNoEncontradaException(codigo);
+
+		repo.deleteByCodigo(codigo);
 	}
 
 	public List<Area> listar() {

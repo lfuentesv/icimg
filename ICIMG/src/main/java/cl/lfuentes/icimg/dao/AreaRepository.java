@@ -9,5 +9,5 @@ import cl.lfuentes.icimg.entityTo.Area;
 public interface AreaRepository extends JpaRepository<Area, String>{
 
 	Optional<Area> findByCodigo(String codigo);
-
+	void deleteByCodigo(String codigo);
 }
