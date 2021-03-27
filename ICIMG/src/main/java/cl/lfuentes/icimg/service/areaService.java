@@ -3,6 +3,7 @@ package cl.lfuentes.icimg.service;
 import java.util.List;
 import java.util.Optional;
 
+import cl.lfuentes.icimg.validacion.RecursoExistenteException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,7 +23,13 @@ public class areaService {
 	private EjeService ejeServicio;
 	
 	public Area crear(AreaRTO area) {
-		/*Validamos si el Eje enviado Existe*/
+		/**Validamos que el área no exista*/
+		
+		Optional<Area> areaExistente = repo.findByCodigo(area.getCodigo());
+
+		if (areaExistente.isPresent()) throw new RecursoExistenteException("Área",area.getCodigo());
+		
+		/**Validamos si el Eje enviado Existe*/
 		
 		Optional<Eje> eje = ejeServicio.buscar(area.getEje());		
 	
