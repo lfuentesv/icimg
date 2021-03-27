@@ -40,6 +40,21 @@ public class areaService {
 		return areaCreada;
 	}
 
+	public Area actualizar(String codigo,AreaRTO area) {
+		/**Validamos que el área exista*/
+		Optional<Area> areaExistente = repo.findByCodigo(area.getCodigo());
+		if (!areaExistente.isPresent()) throw new areaNoEncontradaException(codigo);
+
+		/**Validamos si el Eje enviado Existe*/
+		Optional<Eje> eje = ejeServicio.buscar(area.getEje());
+
+		Area  areaPO = new Area ( codigo, area.getNombre());
+		eje.ifPresent(areaPO::setEje);
+		Area areaCreada = repo.saveAndFlush(areaPO);
+
+		return areaCreada;
+	}
+
 	public List<Area> listar() {
 
 		List<Area> areas = repo.findAll();

@@ -53,7 +53,7 @@ public class AreasApi {
 	@PutMapping("/{id}")
 	public ResponseEntity<Area> update(@Valid @RequestBody AreaRTO area ,@PathVariable(value = "id") String id){
 				
-		Area areaRespuesta = servicio.crear(area);
+		Area areaRespuesta = servicio.actualizar(id, area);
 		
 		return new ResponseEntity <>(areaRespuesta,HttpStatus.CREATED );
 	}
