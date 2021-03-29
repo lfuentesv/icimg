@@ -9,7 +9,7 @@ public class Eje {
 	@Id
 	private String codigo;
 	private String nombre;
-	
+
 	public Eje() {
 	}
 	
@@ -25,7 +25,5 @@ public class Eje {
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
-	
-	
 
 }

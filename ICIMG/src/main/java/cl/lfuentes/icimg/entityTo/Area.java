@@ -13,7 +13,7 @@ public class Area {
 	private String codigo;
 	private String nombre;
 
-	@ManyToOne(optional = false, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@ManyToOne(optional = false, fetch = FetchType.EAGER)
 	private Eje eje;
 
 	public Area() {
