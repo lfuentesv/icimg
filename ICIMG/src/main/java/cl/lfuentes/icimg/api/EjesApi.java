@@ -8,12 +8,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import cl.lfuentes.icimg.entityTo.Eje;
 import cl.lfuentes.icimg.service.EjeService;
@@ -47,5 +42,18 @@ public class EjesApi {
 		Optional<Eje> eje = servicio.buscar(id);
 		
 		return ResponseEntity.ok(eje);
+	}
+	@PutMapping("/{id}")
+	public ResponseEntity<Eje> update(@Valid @RequestBody Eje eje , @PathVariable(value = "id") String id){
+
+		Eje ejeRespuesta = servicio.actualizar(id, eje);
+
+		return new ResponseEntity <>(ejeRespuesta,HttpStatus.CREATED );
+	}
+	@DeleteMapping("/{id}")
+	public ResponseEntity<String> eliminar(@PathVariable(value = "id") String id){
+		servicio.eliminar(id);
+
+		return ResponseEntity.ok("");
 	}
 }

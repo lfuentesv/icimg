@@ -25,13 +25,10 @@ public class areaService {
 	
 	public Area crear(AreaRTO area) {
 		/**Validamos que el área no exista*/
-		
 		Optional<Area> areaExistente = repo.findByCodigo(area.getCodigo());
-
 		if (areaExistente.isPresent()) throw new RecursoExistenteException("Área",area.getCodigo());
 		
 		/**Validamos si el Eje enviado Existe*/
-		
 		Optional<Eje> eje = ejeServicio.buscar(area.getEje());		
 	
 		Area  areaPO = new Area ( area.getCodigo(), area.getNombre());

@@ -10,4 +10,5 @@ public interface EjeRepository extends JpaRepository<Eje, String>{
 
 	Optional<Eje> findByCodigo(String codigo);
 
+    void deleteByCodigo(String codigo);
 }

@@ -12,7 +12,12 @@ public class Eje {
 
 	public Eje() {
 	}
-	
+
+	public Eje(String codigo, String nombre) {
+		this.codigo = codigo;
+		this.nombre = nombre;
+	}
+
 	public String getCodigo() {
 		return codigo;
 	}
