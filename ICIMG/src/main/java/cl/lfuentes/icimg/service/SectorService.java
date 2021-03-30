@@ -3,6 +3,7 @@ package cl.lfuentes.icimg.service;
 import java.util.List;
 import java.util.Optional;
 
+import cl.lfuentes.icimg.validacion.RecursoExistenteException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,6 +21,9 @@ public class SectorService {
 	
 
 	public Sector crear(Sector sector) {
+		/**Validamos que el área no exista*/
+		Optional<Sector> existente = repo.findByCodigo(sector.getCodigo());
+		if (existente.isPresent()) throw new RecursoExistenteException("Sector",sector.getCodigo());
 
 		Sector sectorCreado = repo.saveAndFlush(sector);
 		return sectorCreado;
