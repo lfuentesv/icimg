@@ -8,12 +8,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import cl.lfuentes.icimg.entityTo.Sector;
 import cl.lfuentes.icimg.service.SectorService;
@@ -47,5 +42,18 @@ public class SectoresApi {
 		Optional<Sector> sector = servicio.buscar(id);
 		
 		return ResponseEntity.ok(sector);
+	}
+	@PutMapping("/{id}")
+	public ResponseEntity<Sector> update(@Valid @RequestBody Sector sector , @PathVariable(value = "id") String id){
+
+		Sector respuesta = servicio.actualizar(id, sector);
+
+		return new ResponseEntity <>(respuesta,HttpStatus.CREATED );
+	}
+	@DeleteMapping("/{id}")
+	public ResponseEntity<String> eliminar(@PathVariable(value = "id") String id){
+		servicio.eliminar(id);
+
+		return ResponseEntity.ok("");
 	}
 }

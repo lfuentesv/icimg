@@ -10,4 +10,5 @@ public interface SectorRepository extends JpaRepository<Sector, String>{
 
 	Optional<Sector> findByCodigo(String codigo);
 
+    void deleteByCodigo(String codigo);
 }

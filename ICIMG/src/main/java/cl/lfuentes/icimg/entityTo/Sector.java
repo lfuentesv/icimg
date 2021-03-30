@@ -12,7 +12,12 @@ public class Sector {
 	
 	public Sector() {
 	}
-	
+
+	public Sector(String codigo, String nombre) {
+		this.codigo = codigo;
+		this.nombre = nombre;
+	}
+
 	public String getCodigo() {
 		return codigo;
 	}

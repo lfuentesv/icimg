@@ -10,6 +10,8 @@ import cl.lfuentes.icimg.dao.SectorRepository;
 import cl.lfuentes.icimg.entityTo.Sector;
 import cl.lfuentes.icimg.validacion.sectorNoEncontradoException;
 
+import javax.transaction.Transactional;
+
 @Service
 public class SectorService {
 
@@ -33,5 +35,21 @@ public class SectorService {
 		
 		return Optional.ofNullable(repo.findByCodigo(codigo).orElseThrow(() -> new sectorNoEncontradoException(codigo)));
 	}
+	@Transactional
+    public void eliminar(String codigo) {
+		Optional<Sector> existente = repo.findByCodigo(codigo);
+		if (!existente.isPresent()) throw new sectorNoEncontradoException(codigo);
 
+		repo.deleteByCodigo(codigo);
+	}
+
+	public Sector actualizar(String codigo, Sector sector) {
+		/**Validamos que el sector exista*/
+		Optional<Sector> existente = repo.findByCodigo(sector.getCodigo());
+		if (!existente.isPresent()) throw new sectorNoEncontradoException(codigo);
+
+		Sector  po = new Sector ( codigo, sector.getNombre());
+
+		return repo.saveAndFlush(po);
+	}
 }
