@@ -8,12 +8,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import cl.lfuentes.icimg.entityTo.Capa;
 import cl.lfuentes.icimg.requestTO.CapaRTO;
@@ -48,6 +43,20 @@ public class CapasApi {
 		Optional<Capa> capa = servicio.buscar(id);
 		
 		return ResponseEntity.ok(capa);
+	}
+
+	@PutMapping("/{id}")
+	public ResponseEntity<Capa> update(@Valid @RequestBody CapaRTO capa , @PathVariable(value = "id") String id){
+
+		Capa respuesta = servicio.actualizar(id, capa);
+
+		return new ResponseEntity <>(respuesta,HttpStatus.CREATED );
+	}
+	@DeleteMapping("/{id}")
+	public ResponseEntity<String> eliminar(@PathVariable(value = "id") String id){
+		servicio.eliminar(id);
+
+		return ResponseEntity.ok("");
 	}
 	
 }

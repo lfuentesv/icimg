@@ -1,6 +1,5 @@
 package cl.lfuentes.icimg.entityTo;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
@@ -15,9 +14,9 @@ public class Capa {
 	private float espesorObjetivo;
 	private float elevacionObjetivo;
 	private float tolerancia;
-	@ManyToOne(optional = false, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@ManyToOne(optional = false, fetch = FetchType.EAGER)
 	private Area codArea;
-	@ManyToOne(optional = false, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@ManyToOne(optional = false, fetch = FetchType.EAGER)
 	private Sector codSector;
 	
 	public Capa() {

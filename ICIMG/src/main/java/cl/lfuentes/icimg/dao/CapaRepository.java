@@ -10,4 +10,5 @@ public interface CapaRepository extends JpaRepository<Capa, String>{
 
 	Optional<Capa> findByCodigo(String codigo);
 
+    void deleteByCodigo(String codigo);
 }
