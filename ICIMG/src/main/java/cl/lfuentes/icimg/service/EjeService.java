@@ -3,8 +3,10 @@ package cl.lfuentes.icimg.service;
 import java.util.List;
 import java.util.Optional;
 
+import cl.lfuentes.icimg.validacion.DeleteException;
 import cl.lfuentes.icimg.validacion.RecursoExistenteException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import cl.lfuentes.icimg.dao.EjeRepository;
@@ -55,7 +57,11 @@ public class EjeService {
 	public void eliminar(String codigo) {
 		Optional<Eje> ejeExistente = ejeRepo.findByCodigo(codigo);
 		if (!ejeExistente.isPresent()) throw new ejeNoEncontradoException(codigo);
-
-		ejeRepo.deleteByCodigo(codigo);
+		try {
+			ejeRepo.deleteByCodigo(codigo);
+			ejeRepo.flush();
+		}catch (DataIntegrityViolationException e){
+			throw new DeleteException("Error eliminando eje, revise que no este asociado con otro recurso");
+		}
 	}
 }

@@ -20,4 +20,13 @@ public class ParametrosAdvisor {
 	  return respuestaError;
 	}
 
+	@ExceptionHandler(DeleteException.class)
+	@ResponseStatus(HttpStatus.BAD_REQUEST)
+	@ResponseBody
+	public ErrorResponse onDeleteException(DeleteException e) {
+		ErrorResponse respuestaError = new ErrorResponse();
+		respuestaError.getErrores().add(new Error(e.getMessage()));
+		return respuestaError;
+	}
+
 }
