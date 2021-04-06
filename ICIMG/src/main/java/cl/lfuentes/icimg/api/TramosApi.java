@@ -4,16 +4,10 @@ import java.util.List;
 import java.util.Optional;
 
 import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import cl.lfuentes.icimg.entityTo.Tramo;
 import cl.lfuentes.icimg.requestTO.TramoRTO;
@@ -48,6 +42,20 @@ public class TramosApi {
 		Optional<Tramo> tramo = servicio.buscar(id);
 		
 		return ResponseEntity.ok(tramo);
+	}
+
+	@PutMapping("/{id}")
+	public ResponseEntity<Tramo> update(@Valid @RequestBody TramoRTO tramo , @PathVariable(value = "id") String id){
+
+		Tramo respuesta = servicio.actualizar(id, tramo);
+
+		return new ResponseEntity <>(respuesta,HttpStatus.CREATED );
+	}
+	@DeleteMapping("/{id}")
+	public ResponseEntity<String> eliminar(@PathVariable(value = "id") String id){
+		servicio.eliminar(id);
+
+		return ResponseEntity.ok("");
 	}
 	
 }

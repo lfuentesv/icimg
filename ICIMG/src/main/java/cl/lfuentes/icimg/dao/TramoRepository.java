@@ -10,4 +10,5 @@ public interface TramoRepository extends JpaRepository<Tramo, String>{
 
 	Optional<Tramo> findById(int parseInt);
 
+    void deleteById(int parseInt);
 }

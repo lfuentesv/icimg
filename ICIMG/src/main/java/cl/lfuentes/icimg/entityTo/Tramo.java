@@ -13,7 +13,7 @@ public class Tramo {
 	@Id
 	@GeneratedValue
 	private Integer id;
-	@ManyToOne(optional = false, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@ManyToOne(optional = false,  fetch = FetchType.EAGER)
 	private Capa codCapa;
 	private Integer kmInicio;
 	private Integer kmTermino;
