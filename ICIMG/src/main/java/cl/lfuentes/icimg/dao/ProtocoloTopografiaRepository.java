@@ -10,4 +10,5 @@ public interface ProtocoloTopografiaRepository extends JpaRepository<ProtocoloTo
 
 	Optional<ProtocoloTopografia> findByCodigo(String codigo);
 
+	void deleteByCodigo(String codigo);
 }

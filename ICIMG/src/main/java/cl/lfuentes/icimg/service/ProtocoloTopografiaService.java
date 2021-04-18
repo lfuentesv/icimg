@@ -3,14 +3,18 @@ package cl.lfuentes.icimg.service;
 import java.util.List;
 import java.util.Optional;
 
+import cl.lfuentes.icimg.entityTo.*;
+import cl.lfuentes.icimg.validacion.DeleteException;
+import cl.lfuentes.icimg.validacion.capaNoEncontradaException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import cl.lfuentes.icimg.dao.ProtocoloTopografiaRepository;
-import cl.lfuentes.icimg.entityTo.ProtocoloTopografia;
-import cl.lfuentes.icimg.entityTo.Tramo;
 import cl.lfuentes.icimg.requestTO.ProtocoloTopografiaRTO;
 import cl.lfuentes.icimg.validacion.protocoloTopografiaNoEncontradoException;
+
+import javax.transaction.Transactional;
 
 @Service
 public class ProtocoloTopografiaService {
@@ -45,4 +49,32 @@ public class ProtocoloTopografiaService {
 		return Optional.ofNullable(repo.findByCodigo(codigo).orElseThrow(() -> new protocoloTopografiaNoEncontradoException(codigo)));
 	}
 
+	@Transactional
+    public void eliminar(String codigo) {
+
+		Optional<ProtocoloTopografia> existente = repo.findByCodigo(codigo);
+		if (!existente.isPresent()) throw new protocoloTopografiaNoEncontradoException(codigo);
+		try {
+			repo.deleteByCodigo(codigo);
+			repo.flush();
+		}catch (DataIntegrityViolationException e){
+			throw new DeleteException("Error eliminando protocolo de topografía, revise que no este asociado con otro recurso");
+		}
+    }
+
+	public ProtocoloTopografia actualizar(String codigo, ProtocoloTopografiaRTO protocolo) {
+
+		/**Validamos que exista*/
+		Optional<ProtocoloTopografia> existente = repo.findByCodigo(codigo);
+		if (!existente.isPresent()) throw new protocoloTopografiaNoEncontradoException(codigo);
+
+		Optional<Tramo> tramo = tramoServicio.buscar(protocolo.getIdTramo());
+
+		ProtocoloTopografia  po = new ProtocoloTopografia ( protocolo.getCodigo(), protocolo.getFechaControl(), protocolo.getNombreTopografo(), protocolo.getObservaciones(), protocolo.getLineasControl());
+		tramo.ifPresent(po::setIdTramo);
+
+		po.getLineasControl().forEach( (p) -> {p.setProtocoloTopografia(po);});
+
+		return repo.saveAndFlush(po);
+	}
 }
