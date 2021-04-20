@@ -5,7 +5,6 @@ import java.util.Optional;
 
 import cl.lfuentes.icimg.entityTo.*;
 import cl.lfuentes.icimg.validacion.DeleteException;
-import cl.lfuentes.icimg.validacion.capaNoEncontradaException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
@@ -21,6 +20,7 @@ public class ProtocoloTopografiaService {
 
 	@Autowired
 	private ProtocoloTopografiaRepository repo;
+
 	
 	@Autowired
 	private TramoService tramoServicio;
@@ -69,11 +69,11 @@ public class ProtocoloTopografiaService {
 		if (!existente.isPresent()) throw new protocoloTopografiaNoEncontradoException(codigo);
 
 		Optional<Tramo> tramo = tramoServicio.buscar(protocolo.getIdTramo());
-
+//TODO acá solo esta dejando null la referencia, deberían eliminarse.
+		existente.ifPresent(proto -> proto.getLineasControl().forEach( (p) -> {p.setProtocoloTopografia(null);}));
 		ProtocoloTopografia  po = new ProtocoloTopografia ( protocolo.getCodigo(), protocolo.getFechaControl(), protocolo.getNombreTopografo(), protocolo.getObservaciones(), protocolo.getLineasControl());
+		po.getLineasControl().forEach( (p) -> p.setProtocoloTopografia(po));
 		tramo.ifPresent(po::setIdTramo);
-
-		po.getLineasControl().forEach( (p) -> {p.setProtocoloTopografia(po);});
 
 		return repo.saveAndFlush(po);
 	}

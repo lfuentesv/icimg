@@ -85,6 +85,4 @@ public class ProtocoloTopografia {
 		this.lineasControl = lineasControl;
 	}
 
-	
-	
 }
