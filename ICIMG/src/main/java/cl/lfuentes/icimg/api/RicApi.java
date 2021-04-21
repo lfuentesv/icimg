@@ -1,23 +1,16 @@
 package cl.lfuentes.icimg.api;
 
-import java.util.List;
-import java.util.Optional;
-
-import javax.validation.Valid;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
 import cl.lfuentes.icimg.entityTo.Ric;
 import cl.lfuentes.icimg.requestTO.RicRTO;
 import cl.lfuentes.icimg.service.RicService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
+import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping(value = "/ric")
@@ -48,6 +41,20 @@ public class RicApi {
 		Optional<Ric> protocolo = servicio.buscar(id);
 		
 		return ResponseEntity.ok(protocolo);
+	}
+
+	@PutMapping("/{id}")
+	public ResponseEntity<Ric> update(@Valid @RequestBody RicRTO ric , @PathVariable(value = "id") Integer id){
+
+		Ric respuesta = servicio.actualizar(id, ric);
+
+		return new ResponseEntity <>(respuesta,HttpStatus.CREATED );
+	}
+	@DeleteMapping("/{id}")
+	public ResponseEntity<String> eliminar(@PathVariable(value = "id") Integer id){
+		servicio.eliminar(id);
+
+		return ResponseEntity.ok("");
 	}
 	
 }

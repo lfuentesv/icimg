@@ -10,4 +10,5 @@ public interface RicRepository extends JpaRepository<Ric, String>{
 
 	Optional<Ric> findByNumero(Integer numero);
 
+    void deleteByNumero(Integer numero);
 }
