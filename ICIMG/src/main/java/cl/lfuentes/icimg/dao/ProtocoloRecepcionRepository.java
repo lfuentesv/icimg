@@ -10,4 +10,5 @@ public interface ProtocoloRecepcionRepository extends JpaRepository<ProtocoloRec
 
 	Optional<ProtocoloRecepcion> findByCodigo(String codigo);
 
+    void deleteByCodigo(String codigo);
 }
