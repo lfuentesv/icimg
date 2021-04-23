@@ -11,7 +11,7 @@ import cl.lfuentes.icimg.dao.AreaRepository;
 import cl.lfuentes.icimg.entityTo.Area;
 import cl.lfuentes.icimg.entityTo.Eje;
 import cl.lfuentes.icimg.requestTO.AreaRTO;
-import cl.lfuentes.icimg.validacion.areaNoEncontradaException;
+import cl.lfuentes.icimg.validacion.AreaNoEncontradaException;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
@@ -41,7 +41,7 @@ public class areaService {
 	public Area actualizar(String codigo,AreaRTO area) {
 		/**Validamos que el área exista*/
 		Optional<Area> areaExistente = repo.findByCodigo(area.getCodigo());
-		if (!areaExistente.isPresent()) throw new areaNoEncontradaException(codigo);
+		if (!areaExistente.isPresent()) throw new AreaNoEncontradaException(codigo);
 
 		/**Validamos si el Eje enviado Existe*/
 		Optional<Eje> eje = ejeServicio.buscar(area.getEje());
@@ -57,7 +57,7 @@ public class areaService {
 	public void eliminar(String codigo) {
 
 		Optional<Area> areaExistente = repo.findByCodigo(codigo);
-		if (!areaExistente.isPresent()) throw new areaNoEncontradaException(codigo);
+		if (!areaExistente.isPresent()) throw new AreaNoEncontradaException(codigo);
 
 		repo.deleteByCodigo(codigo);
 	}
@@ -70,7 +70,7 @@ public class areaService {
 
 	public Optional<Area> buscar(String codigo) {
 		
-		return Optional.ofNullable(repo.findByCodigo(codigo).orElseThrow(() -> new areaNoEncontradaException(codigo)));
+		return Optional.ofNullable(repo.findByCodigo(codigo).orElseThrow(() -> new AreaNoEncontradaException(codigo)));
 	}
 
 }

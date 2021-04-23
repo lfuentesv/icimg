@@ -14,7 +14,7 @@ import cl.lfuentes.icimg.entityTo.Area;
 import cl.lfuentes.icimg.entityTo.Capa;
 import cl.lfuentes.icimg.entityTo.Sector;
 import cl.lfuentes.icimg.requestTO.CapaRTO;
-import cl.lfuentes.icimg.validacion.capaNoEncontradaException;
+import cl.lfuentes.icimg.validacion.CapaNoEncontradaException;
 
 import javax.transaction.Transactional;
 
@@ -53,13 +53,13 @@ public class CapaService {
 
 	public Optional<Capa> buscar(String codigo) {
 		
-		return Optional.ofNullable(repo.findByCodigo(codigo).orElseThrow(() -> new capaNoEncontradaException(codigo)));
+		return Optional.ofNullable(repo.findByCodigo(codigo).orElseThrow(() -> new CapaNoEncontradaException(codigo)));
 	}
 
     public Capa actualizar(String codigo, CapaRTO capa) {
 		/**Validamos que exista*/
 		Optional<Capa> existente = repo.findByCodigo(capa.getCodigo());
-		if (!existente.isPresent()) throw new capaNoEncontradaException(codigo);
+		if (!existente.isPresent()) throw new CapaNoEncontradaException(codigo);
 
 		Optional<Area> area = areaServicio.buscar(capa.getCodArea());
 		Optional<Sector> sector = sectorServicio.buscar(capa.getCodSector());
@@ -74,7 +74,7 @@ public class CapaService {
 	@Transactional
 	public void eliminar(String codigo) {
 		Optional<Capa> existente = repo.findByCodigo(codigo);
-		if (!existente.isPresent()) throw new capaNoEncontradaException(codigo);
+		if (!existente.isPresent()) throw new CapaNoEncontradaException(codigo);
 		try {
 			repo.deleteByCodigo(codigo);
 			repo.flush();

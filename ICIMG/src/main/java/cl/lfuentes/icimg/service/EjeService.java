@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 
 import cl.lfuentes.icimg.dao.EjeRepository;
 import cl.lfuentes.icimg.entityTo.Eje;
-import cl.lfuentes.icimg.validacion.ejeNoEncontradoException;
+import cl.lfuentes.icimg.validacion.EjeNoEncontradoException;
 
 import javax.transaction.Transactional;
 
@@ -40,13 +40,13 @@ public class EjeService {
 
 	public Optional<Eje> buscar(String codigo) {
 		
-		return Optional.ofNullable(ejeRepo.findByCodigo(codigo).orElseThrow(() -> new ejeNoEncontradoException(codigo)));
+		return Optional.ofNullable(ejeRepo.findByCodigo(codigo).orElseThrow(() -> new EjeNoEncontradoException(codigo)));
 	}
 
     public Eje actualizar(String codigo, Eje eje) {
 		/**Validamos que el eje exista*/
 		Optional<Eje> ejeExistente = ejeRepo.findByCodigo(eje.getCodigo());
-		if (!ejeExistente.isPresent()) throw new ejeNoEncontradoException(codigo);
+		if (!ejeExistente.isPresent()) throw new EjeNoEncontradoException(codigo);
 
 		Eje  ejePO = new Eje ( codigo, eje.getNombre());
 
@@ -56,7 +56,7 @@ public class EjeService {
     @Transactional
 	public void eliminar(String codigo) {
 		Optional<Eje> ejeExistente = ejeRepo.findByCodigo(codigo);
-		if (!ejeExistente.isPresent()) throw new ejeNoEncontradoException(codigo);
+		if (!ejeExistente.isPresent()) throw new EjeNoEncontradoException(codigo);
 		try {
 			ejeRepo.deleteByCodigo(codigo);
 			ejeRepo.flush();

@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 
 import cl.lfuentes.icimg.dao.ProtocoloTopografiaRepository;
 import cl.lfuentes.icimg.requestTO.ProtocoloTopografiaRTO;
-import cl.lfuentes.icimg.validacion.protocoloTopografiaNoEncontradoException;
+import cl.lfuentes.icimg.validacion.ProtocoloTopografiaNoEncontradoException;
 
 import javax.transaction.Transactional;
 
@@ -46,14 +46,14 @@ public class ProtocoloTopografiaService {
 
 	public Optional<ProtocoloTopografia> buscar(String codigo) {
 		
-		return Optional.ofNullable(repo.findByCodigo(codigo).orElseThrow(() -> new protocoloTopografiaNoEncontradoException(codigo)));
+		return Optional.ofNullable(repo.findByCodigo(codigo).orElseThrow(() -> new ProtocoloTopografiaNoEncontradoException(codigo)));
 	}
 
 	@Transactional
     public void eliminar(String codigo) {
 
 		Optional<ProtocoloTopografia> existente = repo.findByCodigo(codigo);
-		if (!existente.isPresent()) throw new protocoloTopografiaNoEncontradoException(codigo);
+		if (!existente.isPresent()) throw new ProtocoloTopografiaNoEncontradoException(codigo);
 		try {
 			repo.deleteByCodigo(codigo);
 			repo.flush();
@@ -66,7 +66,7 @@ public class ProtocoloTopografiaService {
 
 		/**Validamos que exista*/
 		Optional<ProtocoloTopografia> existente = repo.findByCodigo(codigo);
-		if (!existente.isPresent()) throw new protocoloTopografiaNoEncontradoException(codigo);
+		if (!existente.isPresent()) throw new ProtocoloTopografiaNoEncontradoException(codigo);
 
 		Optional<Tramo> tramo = tramoServicio.buscar(protocolo.getIdTramo());
 //TODO acá solo esta dejando null la referencia, deberían eliminarse.

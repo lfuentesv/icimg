@@ -7,7 +7,7 @@ import cl.lfuentes.icimg.entityTo.Ric;
 import cl.lfuentes.icimg.entityTo.Tramo;
 import cl.lfuentes.icimg.requestTO.ProtocoloRecepcionRTO;
 import cl.lfuentes.icimg.validacion.DeleteException;
-import cl.lfuentes.icimg.validacion.protocoloRecepcionNoEncontradoException;
+import cl.lfuentes.icimg.validacion.ProtocoloRecepcionNoEncontradoException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
@@ -72,13 +72,13 @@ public class ProtocoloRecepcionService {
 
 	public Optional<ProtocoloRecepcion> buscar(String codigo) {
 		
-		return Optional.ofNullable(repo.findByCodigo(codigo).orElseThrow(() -> new protocoloRecepcionNoEncontradoException(codigo)));
+		return Optional.ofNullable(repo.findByCodigo(codigo).orElseThrow(() -> new ProtocoloRecepcionNoEncontradoException(codigo)));
 	}
 
     public ProtocoloRecepcion actualizar(String codigo, ProtocoloRecepcionRTO protocolo) {
 		/**Validamos que exista*/
 		Optional<ProtocoloRecepcion> existente = repo.findByCodigo(codigo);
-		if (!existente.isPresent()) throw new protocoloRecepcionNoEncontradoException(codigo);
+		if (!existente.isPresent()) throw new ProtocoloRecepcionNoEncontradoException(codigo);
 
 		Optional<Tramo> tramo = tramoServicio.buscar(protocolo.getIdTramo());
 		Optional<ProtocoloTopografia> topografia = topografiaServicio.buscar(protocolo.getCodProtocolo());
@@ -113,7 +113,7 @@ public class ProtocoloRecepcionService {
     @Transactional
 	public void eliminar(String codigo) {
 		Optional<ProtocoloRecepcion> existente = repo.findByCodigo(codigo);
-		if (!existente.isPresent()) throw new protocoloRecepcionNoEncontradoException(codigo);
+		if (!existente.isPresent()) throw new ProtocoloRecepcionNoEncontradoException(codigo);
 		try {
 			repo.deleteByCodigo(codigo);
 			repo.flush();

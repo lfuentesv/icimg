@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Optional;
 
 import cl.lfuentes.icimg.validacion.DeleteException;
-import cl.lfuentes.icimg.validacion.RecursoExistenteException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
@@ -13,7 +12,7 @@ import cl.lfuentes.icimg.dao.TramoRepository;
 import cl.lfuentes.icimg.entityTo.Capa;
 import cl.lfuentes.icimg.entityTo.Tramo;
 import cl.lfuentes.icimg.requestTO.TramoRTO;
-import cl.lfuentes.icimg.validacion.tramoNoEncontradoException;
+import cl.lfuentes.icimg.validacion.TramoNoEncontradoException;
 
 import javax.transaction.Transactional;
 
@@ -45,13 +44,13 @@ public class TramoService {
 
 	public Optional<Tramo> buscar(Integer id) {
 		
-		return Optional.ofNullable(repo.findById(id).orElseThrow(() -> new tramoNoEncontradoException(id.toString())));
+		return Optional.ofNullable(repo.findById(id).orElseThrow(() -> new TramoNoEncontradoException(id.toString())));
 	}
 
     public Tramo actualizar(String id, TramoRTO tramo) {
 		/**Validamos que exista*/
 		Optional<Tramo> existente = repo.findById(tramo.getId());
-		if (!existente.isPresent()) throw new tramoNoEncontradoException(id);
+		if (!existente.isPresent()) throw new TramoNoEncontradoException(id);
 
 		Optional<Capa> capa = capaServicio.buscar(tramo.getCodCapa());
 		Tramo  po = new Tramo ( tramo.getId(), tramo.getKmInicio(), tramo.getKmTermino());
@@ -63,7 +62,7 @@ public class TramoService {
     @Transactional
 	public void eliminar(String id) {
 		Optional<Tramo> existente = repo.findById(Integer.parseInt(id));
-		if (!existente.isPresent()) throw new tramoNoEncontradoException(id);
+		if (!existente.isPresent()) throw new TramoNoEncontradoException(id);
 		try {
 			repo.deleteById(Integer.parseInt(id));
 			repo.flush();

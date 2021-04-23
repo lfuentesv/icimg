@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 
 import cl.lfuentes.icimg.dao.SectorRepository;
 import cl.lfuentes.icimg.entityTo.Sector;
-import cl.lfuentes.icimg.validacion.sectorNoEncontradoException;
+import cl.lfuentes.icimg.validacion.SectorNoEncontradoException;
 
 import javax.transaction.Transactional;
 
@@ -37,12 +37,12 @@ public class SectorService {
 
 	public Optional<Sector> buscar(String codigo) {
 		
-		return Optional.ofNullable(repo.findByCodigo(codigo).orElseThrow(() -> new sectorNoEncontradoException(codigo)));
+		return Optional.ofNullable(repo.findByCodigo(codigo).orElseThrow(() -> new SectorNoEncontradoException(codigo)));
 	}
 	@Transactional
     public void eliminar(String codigo) {
 		Optional<Sector> existente = repo.findByCodigo(codigo);
-		if (!existente.isPresent()) throw new sectorNoEncontradoException(codigo);
+		if (!existente.isPresent()) throw new SectorNoEncontradoException(codigo);
 
 		repo.deleteByCodigo(codigo);
 	}
@@ -50,7 +50,7 @@ public class SectorService {
 	public Sector actualizar(String codigo, Sector sector) {
 		/**Validamos que el sector exista*/
 		Optional<Sector> existente = repo.findByCodigo(sector.getCodigo());
-		if (!existente.isPresent()) throw new sectorNoEncontradoException(codigo);
+		if (!existente.isPresent()) throw new SectorNoEncontradoException(codigo);
 
 		Sector  po = new Sector ( codigo, sector.getNombre());
 
