@@ -2,6 +2,7 @@ package cl.lfuentes.icimg.service;
 
 import cl.lfuentes.icimg.dao.UsuarioRepository;
 import cl.lfuentes.icimg.entityTo.Usuario;
+import cl.lfuentes.icimg.requestTO.LoginRTO;
 import cl.lfuentes.icimg.requestTO.UsuarioRTO;
 import cl.lfuentes.icimg.resposeTO.UsuarioResponseTO;
 import cl.lfuentes.icimg.validacion.DeleteException;
@@ -55,5 +56,11 @@ public class UsuarioService {
         }catch (DataIntegrityViolationException e){
             throw new DeleteException("Error eliminando Usuario, revise que no este asociado con otro recurso");
         }
+    }
+
+    public Usuario login(LoginRTO login) {
+
+        return repo.findByRutAndPassword(login.getUserName(), login.getPassword()).orElseThrow(() -> new UsuarioNoEncontradoException(login.getUserName()));
+
     }
 }
